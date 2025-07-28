@@ -1,15 +1,19 @@
-const mysql = require('mysql2');
+const mysql = require('mysql');
 
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'phpmyadmin',
-  database: 'booking_class',
-  port: 3306   // ? Ini port lama
+const connection = mysql.createConnection({
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT || 3306
 });
-db.connect((err) => {
-  if (err) throw err;
-  console.log('? Database connected (port 3306)');
+
+connection.connect((err) => {
+  if (err) {
+    console.error('❌ Error connecting to MySQL:', err.message);
+    return;
+  }
+  console.log('✅ Connected to MySQL database');
 });
 
 module.exports = db;

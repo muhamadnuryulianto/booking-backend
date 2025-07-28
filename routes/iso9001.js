@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/iso9001Controller');
-const upload = require('../middlewares/uploadiso');
+const upload = require('../middlewares/uploadIso');
 
 router.post('/upload', upload.single('file'), controller.upload);
 router.get('/', controller.getAll);
